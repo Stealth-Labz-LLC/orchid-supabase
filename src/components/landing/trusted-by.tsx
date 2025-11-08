@@ -1,9 +1,9 @@
 export function TrustedBy() {
   const companies = [
-    { name: "TechCorp", color: "text-blue-600" },
-    { name: "InnovateLab", color: "text-purple-600" },
+    { name: "TrafficAi", color: "text-blue-600" },
+    { name: "StealthLabz", color: "text-purple-600" },
     { name: "CloudScale", color: "text-indigo-600" },
-    { name: "DataFlow", color: "text-cyan-600" },
+    { name: "DataPortal", color: "text-cyan-600" },
     { name: "SecureBase", color: "text-violet-600" },
     { name: "AppNest", color: "text-blue-500" },
   ];
