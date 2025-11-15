@@ -9,7 +9,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Calendar, CheckCircle2, Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Calendar, CheckCircle2 } from "lucide-react";
 
 interface DemoRequestModalProps {
   open: boolean;
@@ -24,7 +25,7 @@ export function DemoRequestModal({ open, onOpenChange }: DemoRequestModalProps) 
     email: "",
     company: "",
     phone: "",
-    employees: "",
+    service: "",
     message: "",
   });
 
@@ -32,25 +33,42 @@ export function DemoRequestModal({ open, onOpenChange }: DemoRequestModalProps) 
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    // Reset after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      onOpenChange(false);
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        employees: "",
-        message: "",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to submit form");
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // Reset after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        onOpenChange(false);
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+      }, 3000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setIsSubmitting(false);
+      alert("Failed to submit form. Please try again.");
+    }
   };
 
   const handleChange = (
@@ -95,155 +113,134 @@ export function DemoRequestModal({ open, onOpenChange }: DemoRequestModalProps) 
             <form onSubmit={handleSubmit} className="space-y-6 mt-6">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label
-                    htmlFor="name"
-                    className="text-sm font-medium"
-                  >
+                  <label htmlFor="name" className="text-sm font-medium">
                     Full Name <span className="text-red-500">*</span>
                   </label>
-                  <input
+                  <Input
                     id="name"
                     name="name"
                     type="text"
-                    required
+                    placeholder="John Doe"
                     value={formData.name}
                     onChange={handleChange}
-                    className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="John Doe"
+                    required
+                    className="h-11"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label
-                    htmlFor="email"
-                    className="text-sm font-medium"
-                  >
-                    Work Email <span className="text-red-500">*</span>
+                  <label htmlFor="email" className="text-sm font-medium">
+                    Email Address <span className="text-red-500">*</span>
                   </label>
-                  <input
+                  <Input
                     id="email"
                     name="email"
                     type="email"
-                    required
+                    placeholder="john@company.com"
                     value={formData.email}
                     onChange={handleChange}
-                    className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="john@company.com"
+                    required
+                    className="h-11"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label
-                    htmlFor="company"
-                    className="text-sm font-medium"
-                  >
-                    Company Name <span className="text-red-500">*</span>
+                  <label htmlFor="company" className="text-sm font-medium">
+                    Company Name
                   </label>
-                  <input
+                  <Input
                     id="company"
                     name="company"
                     type="text"
-                    required
+                    placeholder="Acme Inc."
                     value={formData.company}
                     onChange={handleChange}
-                    className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="Acme Inc."
+                    className="h-11"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label
-                    htmlFor="phone"
-                    className="text-sm font-medium"
-                  >
+                  <label htmlFor="phone" className="text-sm font-medium">
                     Phone Number
                   </label>
-                  <input
+                  <Input
                     id="phone"
                     name="phone"
                     type="tel"
+                    placeholder="+1 (555) 123-4567"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    placeholder="+1 (555) 000-0000"
+                    className="h-11"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="employees"
-                  className="text-sm font-medium"
-                >
-                  Company Size
+                <label htmlFor="service" className="text-sm font-medium">
+                  What brings you here? <span className="text-red-500">*</span>
                 </label>
                 <select
-                  id="employees"
-                  name="employees"
-                  value={formData.employees}
+                  id="service"
+                  name="service"
+                  value={formData.service}
                   onChange={handleChange}
-                  className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  required
+                  className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  <option value="">Select company size</option>
-                  <option value="1-10">1-10 employees</option>
-                  <option value="11-50">11-50 employees</option>
-                  <option value="51-200">51-200 employees</option>
-                  <option value="201-500">201-500 employees</option>
-                  <option value="501+">501+ employees</option>
+                  <option value="">Select a service...</option>
+                  <option value="talent-hire">Hire Developer</option>
+                  <option value="partnership">Partnership With Orchid Software</option>
+                  <option value="web development">Web and App Development</option>
+                  <option value="tech-support">Startup Tech Support</option>
+                  <option value="e-comm">E-Commerce (Shopify &amp; WordPress) Customization</option>
                 </select>
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="message"
-                  className="text-sm font-medium"
-                >
-                  What are you interested in?
+                <label htmlFor="message" className="text-sm font-medium">
+                  Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={4}
+                  rows={6}
+                  placeholder="Tell us about your project and how we can help..."
                   value={formData.message}
                   onChange={handleChange}
+                  required
                   className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Tell us about your project or what you'd like to learn more about..."
                 />
               </div>
 
-              <div className="flex gap-4 pt-6">
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="group relative flex-1 overflow-hidden bg-gradient-to-r from-orange-600 to-orange-500 font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
-                  size="lg"
-                >
-                  {isSubmitting ? (
+              <Button
+                type="submit"
+                size="lg"
+                className="group relative overflow-hidden w-full sm:w-auto bg-gradient-to-r from-orange-600 to-orange-500 hover:shadow-xl hover:scale-105"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="relative z-10 flex items-center">
+                    <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Sending...
+                  </span>
+                ) : (
+                  <>
                     <span className="relative z-10 flex items-center">
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Submitting...
+                      <Calendar className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      Send Message
                     </span>
-                  ) : (
-                    <>
-                      <span className="relative z-10 flex items-center">
-                        <Calendar className="mr-2 h-5 w-5" />
-                        Schedule Demo
-                      </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </>
-                  )}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => onOpenChange(false)}
-                  disabled={isSubmitting}
-                  size="lg"
-                  className="border-2 hover:bg-muted"
-                >
-                  Cancel
-                </Button>
-              </div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </>
+                )}
+              </Button>
+
+              <p className="text-xs text-muted-foreground">
+                By submitting this form, you agree to our{" "}
+                <a href="/privacy" className="text-primary hover:underline">
+                  Privacy Policy
+                </a>
+                .
+              </p>
             </form>
           </>
         )}

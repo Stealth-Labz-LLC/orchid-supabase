@@ -13,6 +13,7 @@ export function ContactForm() {
     email: "",
     company: "",
     phone: "",
+    service: "",
     message: "",
   });
 
@@ -20,26 +21,44 @@ export function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        message: "",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to submit form");
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          service: "",
+          message: "",
+        });
+      }, 3000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setIsSubmitting(false);
+      alert("Failed to submit form. Please try again.");
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -133,6 +152,27 @@ export function ContactForm() {
             className="h-11"
           />
         </div>
+      </div>
+
+      <div className="space-y-2">
+        <label htmlFor="service" className="text-sm font-medium">
+          What brings you here? <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="service"
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+          required
+          className="flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <option value="">Select a service...</option>
+          <option value="talent-hire">Hire Developer</option>
+          <option value="partnership">Partnership With Orchid Software</option>
+          <option value="web development">Web and App Development</option>
+          <option value="tech-support">Startup Tech Support</option>
+          <option value="e-comm">E-Commerce (Shopify &amp; WordPress) Customization</option>
+        </select>
       </div>
 
       <div className="space-y-2">

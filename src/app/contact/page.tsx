@@ -5,7 +5,6 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { OfficeInfo } from "@/components/contact/office-info";
 import { SocialLinks } from "@/components/contact/social-links";
 import { MessageSquare, Headphones, Clock } from "lucide-react";
-import "../../../public/css/pages/contact.css";
 
 export const metadata: Metadata = {
   title: "Contact Us - Get in Touch with Our Team",
@@ -125,7 +124,7 @@ export default function ContactPage() {
               <h3 className="mb-2 font-semibold">How quickly will I receive a response?</h3>
               <p className="text-sm text-muted-foreground">
                 We aim to respond to all inquiries within 24 hours during business days. For
-                urgent matters, please call us directly at +1 (415) 555-1234.
+                urgent matters, please call us directly at +91 9079003238.
               </p>
             </div>
 
@@ -147,14 +146,14 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="rounded-xl border bg-card p-6">
+            {/* <div className="rounded-xl border bg-card p-6">
               <h3 className="mb-2 font-semibold">Can I visit your office?</h3>
               <p className="text-sm text-muted-foreground">
                 Absolutely! We welcome visitors at our San Francisco office. Please schedule an
                 appointment in advance to ensure someone from our team is available to meet with
                 you.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

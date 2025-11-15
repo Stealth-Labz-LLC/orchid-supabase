@@ -4,7 +4,8 @@
 
 /* Footer Container */
 .site-footer {
-  @apply border-t bg-muted/40;
+    border-top-width: 1px;
+    background-color: #fffef3;
 }
 
 .footer-container {

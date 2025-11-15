@@ -15,15 +15,15 @@ export function OfficeInfo() {
             <div>
               <h4 className="mb-1 font-semibold">Phone</h4>
               <p className="text-sm text-muted-foreground">
-                <a href="tel:+14155551234" className="hover:text-primary">
-                  +1 (415) 555-1234
+                <a href="tel:919079003238" className="hover:text-primary">
+                  +91 9079003238
                 </a>
               </p>
-              <p className="text-sm text-muted-foreground">
+              {/* <p className="text-sm text-muted-foreground">
                 <a href="tel:+18005551234" className="hover:text-primary">
                   +1 (800) 555-1234 (Toll-free)
                 </a>
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -34,13 +34,13 @@ export function OfficeInfo() {
             <div>
               <h4 className="mb-1 font-semibold">Email</h4>
               <p className="text-sm text-muted-foreground">
-                <a href="mailto:hello@orchid.com" className="hover:text-primary">
-                  hello@orchid.com
+                <a href="mailto:info@orchidsw.com" className="hover:text-primary">
+                  info@orchidsw.com
                 </a>
               </p>
               <p className="text-sm text-muted-foreground">
-                <a href="mailto:support@orchid.com" className="hover:text-primary">
-                  support@orchid.com
+                <a href="mailto:dev@orchidsw.com" className="hover:text-primary">
+                  dev@orchidsw.com
                 </a>
               </p>
             </div>
@@ -53,8 +53,8 @@ export function OfficeInfo() {
             <div>
               <h4 className="mb-1 font-semibold">Business Hours</h4>
               <div className="space-y-1 text-sm text-muted-foreground">
-                <p>Monday - Friday: 9:00 AM - 6:00 PM PST</p>
-                <p>Saturday: 10:00 AM - 4:00 PM PST</p>
+                <p>Monday - Friday: 9:00 AM - 6:00 PM IST</p>
+                <p>Saturday: 10:00 AM - 4:00 PM IST</p>
                 <p>Sunday: Closed</p>
               </div>
             </div>
