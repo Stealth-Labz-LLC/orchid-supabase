@@ -31,7 +31,7 @@ export function InlineCTA({ variant = "default" }: InlineCTAProps) {
                 className="group relative overflow-hidden bg-gradient-to-r from-orange-600 to-orange-500 hover:shadow-xl hover:scale-105"
                 asChild
               >
-                <a href="/signup">
+                <a href="/contact">
                   <span className="relative z-10 flex items-center">
                     Start Free Trial
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />

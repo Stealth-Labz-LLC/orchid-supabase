@@ -41,7 +41,7 @@ export function CTA() {
               className="group relative overflow-hidden text-base font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
               asChild
             >
-              <Link href="/signup">
+              <Link href="/pricing">
                 <span className="relative z-10 flex items-center">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -65,7 +65,7 @@ export function CTA() {
               className="group text-base font-semibold text-white hover:bg-white/20 hover:scale-105 transition-all duration-300"
               asChild
             >
-              <Link href="/contact">
+              <Link href="https://calendly.com/softwareorchid/tech-call">
                 <MessageSquare className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 Talk to Sales
               </Link>
