@@ -194,9 +194,9 @@ export default function CookiesPage() {
                 If you have questions about our use of cookies, please contact us at:
               </p>
               <ul className="ml-6 list-none text-muted-foreground">
-                <li>Email: privacy@orchid.com</li>
-                <li>Phone: +1 (415) 555-1234</li>
-                <li>Address: 123 Innovation Drive, Suite 500, San Francisco, CA 94107</li>
+                <li>Email: info@orchidsw.com</li>
+                <li>Phone: +91 9079 00 3238</li>
+                <li>Address: 13 Laxmichak Parsa Bazar Patna</li>
               </ul>
             </section>
           </div>
