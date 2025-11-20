@@ -4,12 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 export function TrustedBy() {
   const companies = [
-    { name: "TrafficAi", image: "/images/client-company/trafficai.webp" },
-    { name: "StealthLabz", image: "/images/client-company/stealth-black.png" },
-    { name: "TrafficAi", image: "/images/client-company/trafficai.webp" },
-    { name: "StealthLabz", image: "/images/client-company/stealth-black.png" },
-    { name: "TrafficAi", image: "/images/client-company/trafficai.webp" },
-    { name: "StealthLabz", image: "/images/client-company/stealth-black.png" },
+    { name: "TrafficAi", image: "/images/client-company/trafficai.webp" , site_url:"https://www.trafficai.io/"},
+    { name: "StealthLabz", image: "/images/client-company/stealth-black.png" , site_url:"https://stealthlabz.com/"},
+    { name: "Evergreen Evolutions", image: "/images/client-company/evergreen-evolutions-logo.png" , site_url:"https://evergreenevolutions.com/"},
+    { name: "Quote Rocket", image: "/images/client-company/quote-rocket-logo.svg" , site_url:"https://quoterocket.co.za/"},
   ];
 
   return (
@@ -26,7 +24,7 @@ export function TrustedBy() {
                 key={`first-${index}`}
                 className="flex items-center justify-center opacity-90 transition-opacity hover:opacity-100 mx-8 flex-shrink-0"
               >
-                <Link href="/">
+                <Link href={company.site_url} target="_blank" rel="noopener noreferrer">
                   <Image
                     src={company.image}
                     alt={company.name}
