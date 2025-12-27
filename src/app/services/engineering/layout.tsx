@@ -21,6 +21,7 @@ export const metadata: Metadata = genMeta({
   ],
   url: "/services/engineering",
   type: "website",
+  image: "/images/services/1.webp",
 });
 
 export default function EngineeringLayout({
