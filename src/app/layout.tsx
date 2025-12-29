@@ -115,6 +115,14 @@ export default function RootLayout({
           }}
         />
 
+        {/* TrackMate Pixel with List */}
+        <Script
+          id="trackmate-pixel"
+          src="https://track-mate-server.vercel.app/tm.js"
+          data-company="TM-PZ7ZK"
+          data-list="LST-6XDKNB"
+          strategy="afterInteractive"
+        />
       </head>
 
       <body className={inter.className}>
