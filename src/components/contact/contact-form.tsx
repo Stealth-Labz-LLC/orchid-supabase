@@ -22,6 +22,9 @@ export function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Track user in TrackMate FIRST - this uses the pixel which auto-includes list_id
+    trackFormSubmission(formData, "contact_form");
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -36,9 +39,6 @@ export function ContactForm() {
       if (!response.ok) {
         throw new Error(result.error || "Failed to submit form");
       }
-
-      // Track form submission in TrackMate
-      trackFormSubmission(formData, "contact_form");
 
       setIsSubmitting(false);
       setIsSubmitted(true);

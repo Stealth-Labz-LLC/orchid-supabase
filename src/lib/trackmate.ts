@@ -1,5 +1,6 @@
 // TrackMate Pixel Utility
 // Provides helper functions for tracking user behavior
+// The pixel automatically includes list_id from the data-list attribute
 
 declare global {
   interface Window {
@@ -29,12 +30,23 @@ export interface TrackMateFormData {
 }
 
 /**
- * Identify a user in TrackMate
+ * Identify a user in TrackMate using the pixel
+ * The pixel automatically includes list_id from data-list attribute
  * Creates a profile and links all their page views
  */
 export function identifyUser(data: TrackMateIdentifyData): void {
-  if (typeof window !== 'undefined' && window.TM) {
-    window.TM.identify(data);
+  if (typeof window !== 'undefined') {
+    // Check if TM is available
+    if (window.TM && typeof window.TM.identify === 'function') {
+      window.TM.identify({
+        email: data.email,
+        name: data.name || '',
+        phone: data.phone || '',
+      });
+      console.log('[TrackMate] User identified:', data.email);
+    } else {
+      console.warn('[TrackMate] TM.identify not available - pixel may not be loaded yet');
+    }
   }
 }
 
@@ -42,27 +54,28 @@ export function identifyUser(data: TrackMateIdentifyData): void {
  * Track a custom event in TrackMate
  */
 export function trackEvent(event: string, data?: Record<string, unknown>): void {
-  if (typeof window !== 'undefined' && window.TM) {
+  if (typeof window !== 'undefined' && window.TM && typeof window.TM.track === 'function') {
     window.TM.track(event, data);
   }
 }
 
 /**
- * Track form submission with all form data
+ * Track form submission - identifies user through the pixel
+ * The pixel automatically includes list_id from data-list attribute
  */
 export function trackFormSubmission(formData: TrackMateFormData, formName: string): void {
-  // First identify the user
+  // Identify the user through the pixel (this auto-includes list_id)
   identifyUser({
     email: formData.email,
     name: formData.name,
     phone: formData.phone,
-    company: formData.company,
   });
 
-  // Then track the form submission event with all data
+  // Optionally track the form submission as an event
   trackEvent('form_submitted', {
     form_name: formName,
-    ...formData,
+    service: formData.service,
+    company: formData.company,
   });
 }
 
