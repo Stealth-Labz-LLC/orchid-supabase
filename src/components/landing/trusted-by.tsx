@@ -11,9 +11,9 @@ export function TrustedBy() {
   ];
 
   return (
-    <section className="border-y bg-muted/30 py-12 overflow-hidden">
+    <section className="border-y bg-muted/30 py-8 overflow-hidden">
       <div className="container mx-auto px-4">
-        <p className="mb-8 text-center text-sm font-medium uppercase tracking-wider text-muted-foreground">
+        <p className="mb-6 text-center text-sm font-medium uppercase tracking-wider text-muted-foreground">
           Trusted by leading companies worldwide
         </p>
         <div className="relative">

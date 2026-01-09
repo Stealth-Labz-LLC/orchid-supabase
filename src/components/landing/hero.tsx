@@ -16,7 +16,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-gray-900 dark:via-orange-900/20 dark:to-amber-900/20" />
       <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25" />
 
-      <div className="container relative mx-auto px-4 py-16 md:py-24 lg:py-32">
+      <div className="container relative mx-auto px-4 py-12 md:py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <div className="flex flex-col space-y-8">

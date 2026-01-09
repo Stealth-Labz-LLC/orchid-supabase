@@ -79,7 +79,7 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="relative overflow-hidden bg-muted/30 py-24 md:py-32">
+    <section id="features" className="relative overflow-hidden bg-muted/30 py-12 md:py-16">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.5))] dark:bg-grid-slate-700/25" />
 
@@ -101,7 +101,7 @@ export function Features() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <Card
               key={index}
@@ -123,7 +123,7 @@ export function Features() {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-20 grid gap-8 rounded-2xl border bg-background p-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-8 rounded-2xl border bg-background p-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="text-center">
             <div className="text-4xl font-bold text-primary">500+</div>
             <div className="mt-2 text-sm text-muted-foreground">Projects Delivered</div>
