@@ -172,6 +172,7 @@ export function ContactForm() {
         >
           <option value="">Select a service...</option>
           <option value="talent-hire">Hire Developer</option>
+          <option value="shiksha-erp">Siksha ERP</option>
           <option value="partnership">Partnership With Orchid Software</option>
           <option value="web development">Web and App Development</option>
           <option value="tech-support">Startup Tech Support</option>
